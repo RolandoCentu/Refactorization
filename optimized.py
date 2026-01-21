@@ -1,5 +1,4 @@
 import os
-import shutil
 import heapq
 import time
 
@@ -26,8 +25,7 @@ class MapaAEstrella:
         self.columnas = columnas
         self.mapa = self.crear_mapa()
 
-    # ---------------- Métodos principales ----------------
-    def crear_mapa(self):
+        def crear_mapa(self):
         mapa = []
         for i in range(self.filas):
             fila = []
@@ -41,17 +39,9 @@ class MapaAEstrella:
 
     def imprimir_mapa(self):
         os.system("cls" if os.name == "nt" else "clear")
-        columnas = len(self.mapa[0]) if self.mapa else 0
-        ancho_mapa = columnas
-        ancho_terminal = shutil.get_terminal_size(fallback=(80,24)).columns
-        espacio_izquierda = max(0, (ancho_terminal - ancho_mapa*2)//2)
-        relleno = " " * espacio_izquierda
-
         for fila in self.mapa:
-            linea = "".join(c for c in fila)
-            print(relleno + linea)
-
-    # desde aca las utilidades 
+            print("".join(fila)
+                  
     def encontrar(self, simbolo):
         for i, fila in enumerate(self.mapa):
             for j, val in enumerate(fila):
@@ -141,7 +131,6 @@ class MapaAEstrella:
                     heapq.heappush(abiertos,(f_total,tentative_g,(nf,nc)))
         return False,"No hay camino disponible"
 
-    # ---------------- Gestión de símbolos ----------------
     def meta_final(self, simbolo, fila, columna):
         self.limpiar_camino()
         anterior = self.encontrar(simbolo)
