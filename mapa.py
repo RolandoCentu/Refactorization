@@ -41,13 +41,14 @@ class Mapa:
                 if self.matriz[i][j] in (CAMINO, VISITADO):
                     self.matriz[i][j] = CELDA_VACIA
 
-    def meta_final(self, simbolo, fila, columna):
+    def meta_final(self, simbolo, fila, columna): #para recalcular un nuevo camino cambiando inicio y fin y que no se dupliquen
         self.limpiar_camino()
-        anterior = self.encontrar(simbolo)
+        anterior = self.encontrar(simbolo) #busca inicio y meta
         if anterior:
             ai, aj = anterior
-            self.matriz[ai][aj] = CELDA_VACIA
-        self.matriz[fila][columna] = simbolo
+            self.matriz[ai][aj] = CELDA_VACIA #reemplaza para que quede limpio
+        self.matriz[fila][columna] = simbolo #nueva pos para ini o meta
+
 
     def desbloquear_zonas(self):
         for i in range(self.filas):
@@ -71,6 +72,7 @@ class Mapa:
         celda = self.matriz[fila][columna]
         return celda not in OBSTACULOS
 
-    def costo_celda(self, fila, columna):
+    def costo_celda(self, fila, columna): #"""Devuelve el costo de la celda para el algoritmo A*."""
         celda = self.matriz[fila][columna]
-        return COSTO.get(celda, float("inf"))
+        return COSTO.get(celda, float("inf")) # infinito si no está en COSTO
+
