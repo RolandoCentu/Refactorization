@@ -3,9 +3,6 @@ import heapq
 import time
 
 # Emojis
-
-class Constantes:
-
 BORDE       = "🟫"
 CELDA_VACIA = "⬜"
 AGUA        = "🌊"
