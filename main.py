@@ -1,7 +1,6 @@
-# main.py
 from mapa import Mapa
 from calculadora import CalculadoraAEstrella
-from constantes import AGUA, EDIFICIO, BLOQUEADO, INICIO, META, CELDA_VACIA
+from constantes import AGUA, EDIFICIO, BLOQUEADO, INICIO, META, CELDA_VACIA, IMPASABLE
 
 def main():
     filas = int(input("Filas: "))
@@ -15,10 +14,10 @@ def main():
         print("1) 🌊 Agua")
         print("2) 🏢 Edificio")
         print("3) ⛔ Zona bloqueada temporal")
-        print("4) 🚩 Inicio")
-        print("5) 🏁 Meta")
-        print("6) Borrar")
-        print("7) Calcular Camino")
+        print("4) 🚩 Colocar inicio")
+        print("5) 🏁 Colocar meta")
+        print("6) Borrar obstáculo")
+        print("7) Calcular camino")
         print("8) Desbloquear zonas ⛔")
         print("9) Salir")
         opcion = input("Elige: ").strip()
@@ -49,16 +48,23 @@ def main():
             x = int(input(f"Fila (1 a {filas-2}): "))
             y = int(input(f"Columna (1 a {columnas-2}): "))
             if 1 <= x <= filas-2 and 1 <= y <= columnas-2:
-                if objeto in (INICIO, META):
-                    if calculadora.es_impasable(mapa.matriz[x][y]):
-                        print("No puedes colocar inicio/meta sobre obstáculo")
+                if objeto == INICIO:
+                    if not mapa.es_accesible(x, y):
+                        print("No puedes colocar inicio sobre obstáculo")
                         input("Enter para volver al menú")
                         continue
-                    mapa.meta_final(objeto, x, y)
+                    mapa.meta_final(INICIO, x, y)
+                elif objeto == META:
+                    if not mapa.es_accesible(x, y):
+                        print("No puedes colocar meta sobre obstáculo")
+                        input("Enter para volver al menú")
+                        continue
+                    mapa.meta_final(META, x, y)
+                elif objeto == CELDA_VACIA:
+                    mapa.quitar_obstaculo(x, y)
                 else:
-                    mapa.limpiar_camino()
-                    mapa.matriz[x][y] = objeto
-        except:
+                    mapa.agregar_obstaculo(x, y, objeto)
+        except ValueError:
             pass
 
 if __name__ == "__main__":
