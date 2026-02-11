@@ -10,10 +10,11 @@ CAMINO      = "🟢"
 VISITADO    = "👣"
 
 # Conjunto de obstáculos impasables
-OBSTACULOS = {BORDE, EDIFICIO, BLOQUEADO}
+IMPASABLE = {BORDE, EDIFICIO, BLOQUEADO}
 
 # Diccionario de costos de paso (solo para celdas transitables)
 COSTO = {
     CELDA_VACIA: 1,
     AGUA: 3,
 }
+
