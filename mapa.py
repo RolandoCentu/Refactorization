@@ -1,5 +1,5 @@
 import os
-from constantes import BORDE, CELDA_VACIA, AGUA, EDIFICIO, BLOQUEADO, INICIO, META, CAMINO, VISITADO, OBSTACULOS, COSTO
+from constantes import BORDE, CELDA_VACIA, AGUA, EDIFICIO, BLOQUEADO, INICIO, META, CAMINO, VISITADO, IMPASABLE, COSTO
 
 class Mapa:
     def __init__(self, filas, columnas):
@@ -59,9 +59,10 @@ class Mapa:
     # Métodos
 
     def agregar_obstaculo(self, fila, columna, tipo=EDIFICIO):
-        if self.matriz[fila][columna] == CELDA_VACIA:
+        if self.matriz[fila][columna] in (CELDA_VACIA, CAMINO, VISITADO):
             self.matriz[fila][columna] = tipo
             self.obstaculos.add((fila, columna))
+
 
     def quitar_obstaculo(self, fila, columna):
         if (fila, columna) in self.obstaculos:
@@ -70,9 +71,11 @@ class Mapa:
 
     def es_accesible(self, fila, columna):
         celda = self.matriz[fila][columna]
-        return celda not in OBSTACULOS
-
-    def costo_celda(self, fila, columna): #"""Devuelve el costo de la celda para el algoritmo A*."""
+        return celda not in IMPASABLE
+    
+    def costo_celda(self, fila, columna):
         celda = self.matriz[fila][columna]
-        return COSTO.get(celda, float("inf")) # infinito si no está en COSTO
+    # Si no está en COSTO, se asume costo 1
+        return COSTO.get(celda, 1)
+
 
