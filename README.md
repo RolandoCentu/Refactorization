@@ -18,5 +18,5 @@ El objetivo principal es mejorar la estructura del código existente mediante la
 Clona el repositorio y entra en la carpeta del proyecto:
 
 ```bash
-git clone https://github.com/tuusuario/calculadora-rutas.git
+git clone https://github.com/RolandoCentu/Refactorization.git
 cd calculadora-rutas
