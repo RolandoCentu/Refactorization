@@ -56,7 +56,7 @@ class Mapa:
                 if self.matriz[i][j] == BLOQUEADO:
                     self.matriz[i][j] = CELDA_VACIA
 
-    # Métodos
+    # Métodos nuevos
 
     def agregar_obstaculo(self, fila, columna, tipo=EDIFICIO):
         if self.matriz[fila][columna] in (CELDA_VACIA, CAMINO, VISITADO):
@@ -77,5 +77,6 @@ class Mapa:
         celda = self.matriz[fila][columna]
     # Si no está en COSTO, se asume costo 1
         return COSTO.get(celda, 1)
+
 
 
