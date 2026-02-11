@@ -67,5 +67,6 @@ def main():
         except ValueError:
             pass
 
-if __name__ == "__main__":
+if __name__ == "__main__": #Ejecutá main() solo si este archivo se está ejecutando directamente, no si está siendo importado desde otro archivo
     main()
+
